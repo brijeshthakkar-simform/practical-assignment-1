@@ -25,7 +25,6 @@ describe("Home Component", () => {
       target: { value: "America/Los_Angeles" },
     });
 
-    screen.logTestingPlaygroundURL();
     fireEvent.click(getByText("Submit"));
 
     await waitFor(() => {

@@ -2,7 +2,9 @@ import * as chrono from "chrono-node";
 import moment from "moment-timezone";
 
 export function formatDateAndTime(inputText: string, timezone: string) {
-  const parsedDate = chrono.parseDate(inputText);
+  const parsedDate = chrono.parseDate(inputText, {
+    timezone: moment().tz(timezone).format("z"),
+  });
   const parsedResult = chrono.parse(inputText);
   let output;
 
@@ -11,15 +13,10 @@ export function formatDateAndTime(inputText: string, timezone: string) {
   }
 
   if (parsedDate) {
-    const localDate = new Date(parsedDate);
+    const momentDate = moment.tz(parsedDate, timezone);
+    const formattedDate = momentDate.format("YYYY-MM-DD hh:mm:ss A (Z)");
 
-    const localFormattedDate = moment(localDate).format(
-      "YYYY-MM-DD hh:mm:ss A"
-    );
-    const momentDate = moment.tz(localDate, timezone);
-    const formattedDate = momentDate.format("(Z)");
-
-    output = `${localFormattedDate} ${formattedDate}`;
+    output = `${formattedDate}`;
   } else {
     output = "No valid date and time found in input text.";
   }
