@@ -11,7 +11,7 @@ export function formatDateAndTime(inputText: string, timezone: string) {
   }
 
   if (parsedDate) {
-    const localDate = parsedDate && new Date(parsedDate);
+    const localDate = new Date(parsedDate);
 
     const localFormattedDate = moment(localDate).format(
       "YYYY-MM-DD hh:mm:ss A"

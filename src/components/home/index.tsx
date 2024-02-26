@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import moment from "moment-timezone";
 
 import { formatDateAndTime } from "../../utils/formatDateAndTime";
@@ -9,22 +9,13 @@ interface IFormData {
 }
 
 const Home = () => {
-  const [timezones, setTimezones] = useState<string[]>([]);
+  const timezones = moment.tz.names();
   const [resultText, setResultText] = useState<string>();
 
   const [formData, setFormData] = useState<IFormData>({
     text: "",
     timezone: "Africa/Abidjan",
   });
-
-  useEffect(() => {
-    const fetchTimezones = () => {
-      const timezones = moment.tz.names();
-      setTimezones(timezones);
-    };
-
-    fetchTimezones();
-  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +47,7 @@ const Home = () => {
               setFormData({ ...formData, timezone: e.target.value })
             }
           >
-            {timezones.map((timezone, index) => (
+            {timezones?.map((timezone, index) => (
               <option key={index} value={timezone}>
                 {timezone}
               </option>
@@ -64,7 +55,9 @@ const Home = () => {
           </select>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formData.text}>
+          Submit
+        </button>
       </form>
       {resultText && <div className="result">{resultText}</div>}
     </div>
