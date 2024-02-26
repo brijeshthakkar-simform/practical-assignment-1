@@ -14,3 +14,17 @@
   padding: 2em;
   gap: 10px;
 }
+
+.input-wrapper,
+.select-wrapper {
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-wrapper input,
+.select-wrapper select {
+  width: 200px;
+}

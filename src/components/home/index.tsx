@@ -14,7 +14,7 @@ const Home = () => {
 
   const [formData, setFormData] = useState<IFormData>({
     text: "",
-    timezone: "",
+    timezone: "Africa/Abidjan",
   });
 
   useEffect(() => {
@@ -36,31 +36,37 @@ const Home = () => {
       <div>Practical Assignment</div>
 
       <form onSubmit={(e) => handleSubmit(e)} className="form">
-        <input
-          type="text"
-          value={formData.text}
-          placeholder="Type text"
-          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-        />
+        <div className="input-wrapper">
+          <label htmlFor="text">Text</label>
+          <input
+            type="text"
+            id="text"
+            value={formData.text}
+            placeholder="Type text"
+            onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+          />
+        </div>
 
-        <label htmlFor="cars">Choose a timezone:</label>
-        <select
-          id="timezone"
-          name="timezone"
-          onChange={(e) =>
-            setFormData({ ...formData, timezone: e.target.value })
-          }
-        >
-          {timezones.map((timezone, index) => (
-            <option key={index} value={timezone}>
-              {timezone}
-            </option>
-          ))}
-        </select>
+        <div className="select-wrapper">
+          <label htmlFor="timezone">Choose a timezone:</label>
+          <select
+            id="timezone"
+            name="timezone"
+            onChange={(e) =>
+              setFormData({ ...formData, timezone: e.target.value })
+            }
+          >
+            {timezones.map((timezone, index) => (
+              <option key={index} value={timezone}>
+                {timezone}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <button type="submit">Submit</button>
       </form>
-      {resultText && <div className="result">{JSON.stringify(resultText)}</div>}
+      {resultText && <div className="result">{resultText}</div>}
     </div>
   );
 };
