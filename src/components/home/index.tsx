@@ -55,11 +55,9 @@ const Home = () => {
           </select>
         </div>
 
-        <button type="submit" disabled={!formData.text}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
-      {resultText && <div className="result">{resultText}</div>}
+      <div className="result">{resultText}</div>
     </div>
   );
 };
